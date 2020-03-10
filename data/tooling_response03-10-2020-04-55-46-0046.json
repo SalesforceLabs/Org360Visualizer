@@ -1,0 +1,33 @@
+{
+  "size": 2,
+  "totalSize": 2,
+  "done": true,
+  "queryLocator": null,
+  "entityTypeName": "MetadataComponentDependency",
+  "records": [
+    {
+      "attributes": {
+        "type": "MetadataComponentDependency",
+        "url": "/services/data/v48.0/tooling/sobjects/MetadataComponentDependency/000000000000000AAA"
+      },
+      "MetadataComponentId": "01p8E000001jWmnQAE",
+      "MetadataComponentName": "ToolingApiHelperTest",
+      "MetadataComponentType": "ApexClass",
+      "RefMetadataComponentId": "01p8E000001jWmYQAU",
+      "RefMetadataComponentName": "ToolingAPIHelper",
+      "RefMetadataComponentType": "ApexClass"
+    },
+    {
+      "attributes": {
+        "type": "MetadataComponentDependency",
+        "url": "/services/data/v48.0/tooling/sobjects/MetadataComponentDependency/000000000000000AAA"
+      },
+      "MetadataComponentId": "01p8E000001jWmnQAE",
+      "MetadataComponentName": "ToolingApiHelperTest",
+      "MetadataComponentType": "ApexClass",
+      "RefMetadataComponentId": "01p8E000001jWmiQAE",
+      "RefMetadataComponentName": "ToolingApiMock",
+      "RefMetadataComponentType": "ApexClass"
+    }
+  ]
+}
