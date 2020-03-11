@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Visualizer" icon-name="custom:custom14">
+    
+        <template if:true={results}>
+            <div class="slds-m-around_medium">
+                <lightning-textarea label="Results" value={results}></lightning-textarea>
+            </div>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-m-around_medium">
+                <p>{error}</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>
