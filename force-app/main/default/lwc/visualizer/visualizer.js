@@ -24,6 +24,7 @@ export default class Visualizer extends LightningElement
         RetrieveDependencies({selectedMetadata: selectedMetadata})
         .then(result => {
             this.results = result;
+            console.log(result);
             let data = JSON.parse(result);
         })
         .catch(error => {
