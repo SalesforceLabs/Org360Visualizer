@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthProvider xmlns="http://soap.sforce.com/2006/04/metadata">
+    <consumerKey>3MVG9xB_D1giir9qcTEUOCxGtSU7ttIU0Xk78WGHHJ0DhwZuHthLQzwkz5ZQf925QjUJTNW0.1sWg.xNQEVuo</consumerKey>
+    <consumerSecret>IvAYFLEcudngj1cJLlqWKehem17ZuYzyxFaQGsVH7GeVFxITYdisc+y+aWQrmTDTjhP7LCud3Zd3qcdfKrNMEnBBGPdiC2rX</consumerSecret>
+    <defaultScopes>refresh_token full</defaultScopes>
+    <friendlyName>MetadataVisualizerAuthProvider</friendlyName>
+    <includeOrgIdInIdentifier>true</includeOrgIdInIdentifier>
+    <providerType>Salesforce</providerType>
+    <sendAccessTokenInHeader>false</sendAccessTokenInHeader>
+    <sendClientCredentialsInHeader>false</sendClientCredentialsInHeader>
+    <sendSecretInApis>true</sendSecretInApis>
+</AuthProvider>
