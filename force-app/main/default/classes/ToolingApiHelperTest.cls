@@ -2,20 +2,20 @@
 public with sharing class ToolingApiHelperTest 
 {
     @isTest 
-    static void SelectMetadataTest()
+    static void selectMetadataTest()
     {
         Test.setMock(HttpCalloutMock.class, new ToolingApiMock());
-        string response = ToolingApiHelper.SelectMetadata('CustomObject');
+        string response = ToolingApiHelper.selectMetadata('CustomObject');
 
-        system.assertNotEquals(null, response);
+        system.assertNotEquals(null, response, 'Response Has Data');
     }
 
     @isTest 
-    static void SelectMetadataEmptyTest()
+    static void selectMetadataEmptyTest()
     {
         Test.setMock(HttpCalloutMock.class, new ToolingApiMock());
-        string response = ToolingApiHelper.SelectMetadata(null);
+        string response = ToolingApiHelper.selectMetadata(null);
 
-        system.assertNotEquals(null, response);
+        system.assertNotEquals(null, response, 'Response Has Data');
     }
 }

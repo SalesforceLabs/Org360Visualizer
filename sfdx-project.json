@@ -1,17 +1,26 @@
 {
     "packageDirectories": [
         {
-            "path": "force-app",
+            "path": "packaging/core-package",
             "default": true,
             "package": "Metadata Visualizer",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT"
+        },
+        {
+            "path": "packaging/auth-package",
+            "package": "Metadata Visualizer Auth",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": false
         }
     ],
     "namespace": "mdv",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "48.0",
     "packageAliases": {
-        "Metadata Visualizer": "0Ho0N0000004CAfSAM"
+        "Metadata Visualizer": "0Ho0N0000004CAfSAM",
+        "Metadata Visualizer Auth": "0Ho0N0000004CAkSAM",
+        "Metadata Visualizer Auth@0.1.0-1": "04t0N00000177C9QAI"
     }
 }

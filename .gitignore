@@ -5,7 +5,10 @@
 # Salesforce cache
 .sfdx/
 .localdevserver/
-.vscode/
+.vscode/extensions.json
+.vscode/launch.json
+.vscode/settings.json
+
 .vim-force.com
 
 # LWC VSCode autocomplete
@@ -38,3 +41,4 @@ $RECYCLE.BIN/
 
 **/flexipages/**
 **/profiles/**
+**/packaging/**

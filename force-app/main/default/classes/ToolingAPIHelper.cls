@@ -1,6 +1,6 @@
 public with sharing class ToolingAPIHelper 
 {
-    public static string SelectMetadata(string metadata)
+    public static string selectMetadata(string metadata)
     {
         string selectQuery = 'SELECT MetadataComponentId, MetadataComponentName, MetadataComponentType, RefMetadataComponentId, RefMetadataComponentName, RefMetadataComponentType FROM MetadataComponentDependency';
         string whereQuery = ' WHERE RefMetadataComponentType = \'' + metadata + '\'';
@@ -10,11 +10,11 @@ public with sharing class ToolingAPIHelper
             string completeQuery = selectQuery + whereQuery;
             return SendAPIRequest(completeQuery);
         }
-        
+
         return SendAPIRequest(selectQuery);
     }
 
-    public static string SendAPIRequest(string query)
+    public static string sendAPIRequest(string query)
     {
         string toolingApiUrl = '/services/data/v48.0/tooling/query?q=';
         string completeUrl = toolingApiUrl + EncodingUtil.urlEncode(query, 'UTF-8');
