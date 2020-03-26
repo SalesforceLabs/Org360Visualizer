@@ -1,0 +1,61 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Copy Metadata to Package Folders",
+        "type": "shell",
+        "group": "build",
+        "command": "./scripts/package.sh",
+        "args": [ ],
+        "problemMatcher": ["$eslint-compact"]
+      }
+    ],
+    "inputs": [
+      /*{
+        "id": "packageId",
+        "type": "promptString",
+        "description": "The 2GP Package Id"
+      },
+      {
+        "id": "email",
+        "type": "promptString",
+        "description": "Email address to use for users being created"
+      },
+      {
+        "id": "alias",
+        "type": "promptString",
+        "description": "Scratch org Alias"
+      },
+      {
+        "id": "targetDevHubUsername",
+        "type": "promptString",
+        "description": "(Optional) DevHub username for scratch org creation (if you don't want to use the defaultDevHub)"
+      },
+      {
+        "id": "packageversionid",
+        "type": "promptString",
+        "description": "Package Version Id (04t)",
+        "default": "04t3k0000027AExAAM"
+      },
+      {
+        "id": "targetusername",
+        "type": "promptString",
+        "description": "Target Username"
+      },
+      {
+        "id": "securitytype",
+        "type": "pickString",
+        "options": ["AdminsOnly", "AllUsers"],
+        "description": "Security Type",
+        "default": "AdminsOnly"
+      },
+      {
+        "id": "installationkey",
+        "type": "promptString",
+        "description": "Installation Key (optional)"
+      }*/
+    ]
+  }
+  
