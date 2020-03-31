@@ -11,6 +11,8 @@
 
 .vim-force.com
 
+example/
+
 # LWC VSCode autocomplete
 **/lwc/jsconfig.json
 
@@ -41,4 +43,3 @@ $RECYCLE.BIN/
 
 **/flexipages/**
 **/profiles/**
-**/packaging/**
