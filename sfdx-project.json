@@ -1,14 +1,14 @@
 {
     "packageDirectories": [
         {
-            "path": "packaging/core-package",
-            "default": true,
+            "path": "force-app/core-package",
             "package": "Metadata Visualizer",
             "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT"
+            "versionNumber": "0.1.0.NEXT",
+            "default": true
         },
         {
-            "path": "packaging/auth-package",
+            "path": "force-app/auth-package",
             "package": "Metadata Visualizer Auth",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT",
