@@ -49,6 +49,7 @@ export default class Visualizer extends LightningElement
     }
 
     handleMetadataChange(metadata) {
+        console.log('handleMetadataChange');
         let selectedMetadata = metadata;
         RetrieveDependencies({selectedMetadata: selectedMetadata})
         .then(result => {

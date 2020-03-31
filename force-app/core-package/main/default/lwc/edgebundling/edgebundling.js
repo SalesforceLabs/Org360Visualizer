@@ -140,7 +140,7 @@ function cleanName(name)
     var replaceFields = ['_', ' ', ':'];
     for (var i = 0; i < replaceFields.length; i++)
     {
-        name = name.replace(replaceFields[i], '.');
+        name = name.replace(replaceFields[i], '');
     }
     return name;
 };
@@ -183,7 +183,12 @@ function hierarchy(data, delimiter = ".")
         map.set(name, data);
         if (i >= 0)
         {
-            find({ name: name.substring(0, i), children: [] }).children.push(data);
+            var tmp = find({ name: name.substring(0, i), children: [] });
+            if(!tmp.children) {
+                console.log('Fixed missing children, could be edge case to be aware of');
+                tmp.children = new Array();
+            }
+            tmp.children.push(data);
             data.name = name.substring(i + 1);
         } else
         {
