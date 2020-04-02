@@ -1,14 +1,25 @@
 <template>
     <lightning-card title="Metadata Selector" icon-name="custom:custom14">
         <div class="slds-m-around_medium">
-            <lightning-input label="Metadata Type" value={selectedMetadata} onchange={handleChange}></lightning-input> 
+            <!--<lightning-input label="Metadata Type" value={selectedMetadata} onchange={handleChange}></lightning-input> -->
             <lightning-button label="Select!" onclick={handleClick}></lightning-button>     
 
-            <lightning-checkbox-group name="Metadata Types"
-                              label="Metadata Types"
-                              options={metadataTypes}
-                              value={referenceMetadataTypes}
-                              onchange={handleCheckboxChange}></lightning-checkbox-group>
+            <template if:true={hasReferenceMetadata}>
+                <lightning-checkbox-group name="Metadata Types"
+                                label="Metadata Types"
+                                options={metadataTypes}
+                                value={referenceMetadataTypes}
+                                onchange={handleCheckboxChange}></lightning-checkbox-group>
+            </template>
+
+
+            <br /><br />
+            <template if:true={hasMetadata}>
+                <lightning-pill label={selectedMetadata} onremove={handleRemove}>
+                    <lightning-icon icon-name="standard:account" variant="circle"  alternative-text="account"></lightning-icon>
+                </lightning-pill>
+                <p>{name}</p>
+            </template>
         </div>
     </lightning-card>
 </template>

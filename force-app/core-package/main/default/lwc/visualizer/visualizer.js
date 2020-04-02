@@ -15,6 +15,7 @@ export default class Visualizer extends LightningElement
     @wire(CurrentPageReference) pageRef;
     @track results;
     @track chart;
+    @track types = [];
 
     @track refTypes;
     @track metadataType;
@@ -23,11 +24,12 @@ export default class Visualizer extends LightningElement
     renderedCallback() {
     
         document.addEventListener('customEvent', e => {
+            var name = e.detail.name;
             var parent = e.detail.parent;
             this.metadataType = parent;
-
-            fireEvent(this.pageRef, 'metadataClick', parent);
             this.fetchResults();
+            
+            fireEvent(this.pageRef, 'metadataClick', { name: name, parent: parent });
         });
 
         document.addEventListener('errorEvent', e => {
@@ -80,9 +82,35 @@ export default class Visualizer extends LightningElement
             let data = JSON.parse(result);
             var svg = d3.select(this.template.querySelector('svg.d3'));
             createsvg(d3, data, svg);
+            this.returnData(data);
         })
         .catch(error => {
             console.log(error);
         });
+    }
+
+    returnData(data) {
+        console.log(data);
+        
+        if(this.types.length == 0){
+            data.records.forEach(element => {
+                if (!this.types.some(p => p.name === element.RefMetadataComponentType)) {
+                    this.types.push({ name: element.RefMetadataComponentType, count: 0 });
+                }
+            });
+
+            this.types.sort(p => p.name);
+        }
+
+        this.types.forEach(p => {
+            p.count = 0;
+            data.records.forEach(q => {
+                if(q.RefMetadataComponentType == p.name) {
+                    p.count++;
+                }
+            });
+        });
+
+        fireEvent(this.pageRef, 'metadataTypes', this.types);
     }
 }
