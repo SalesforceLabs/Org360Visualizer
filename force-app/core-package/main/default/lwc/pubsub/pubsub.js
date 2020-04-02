@@ -87,7 +87,7 @@ const fireEvent = (pageRef, eventName, payload) => {
                 try {
                     listener.callback.call(listener.thisArg, payload);
                 } catch (error) {
-                    // fail silently
+                    console.log(error);
                 }
             }
         });

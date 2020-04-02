@@ -3,6 +3,12 @@
         <div class="slds-m-around_medium">
             <lightning-input label="Metadata Type" value={selectedMetadata} onchange={handleChange}></lightning-input> 
             <lightning-button label="Select!" onclick={handleClick}></lightning-button>     
+
+            <lightning-checkbox-group name="Metadata Types"
+                              label="Metadata Types"
+                              options={metadataTypes}
+                              value={referenceMetadataTypes}
+                              onchange={handleCheckboxChange}></lightning-checkbox-group>
         </div>
     </lightning-card>
 </template>

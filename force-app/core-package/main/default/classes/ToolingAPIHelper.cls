@@ -2,15 +2,37 @@ public with sharing class ToolingAPIHelper
 {
     public static string selectMetadata(string metadata)
     {
-        string selectQuery = 'SELECT MetadataComponentId, MetadataComponentName, MetadataComponentType, RefMetadataComponentId, RefMetadataComponentName, RefMetadataComponentType FROM MetadataComponentDependency';
-        string whereQuery = ' WHERE RefMetadataComponentType = \'' + metadata + '\'';
+        return selectMetadata(metadata, '');
+    }
 
-        if(!string.isEmpty(metadata))
+    public static string selectMetadata(string metadata, string referenceMetadataTypes)
+    {
+        string selectQuery = 'SELECT MetadataComponentId, MetadataComponentName, MetadataComponentType, RefMetadataComponentId, RefMetadataComponentName, RefMetadataComponentType FROM MetadataComponentDependency';
+        string whereQuery = ' WHERE ';
+        string whereQueryMetadata = 'MetadataComponentType=\'' + metadata + '\'';
+        string whereQueryReferenceTypes = 'RefMetadataComponentType IN (' + referenceMetadataTypes + ')';
+
+        //string completeQuery = '';
+
+        if(!string.isEmpty(metadata) || !string.isEmpty(referenceMetadataTypes))
         {
-            string completeQuery = selectQuery + whereQuery;
-            return SendAPIRequest(completeQuery);
+            selectQuery += whereQuery;
+
+            if(!string.isEmpty(metadata) && !string.isEmpty(referenceMetadataTypes))
+            {
+                selectQuery += string.join(new List<string> { whereQueryMetadata, whereQueryReferenceTypes }, ' AND ');
+            }
+            else if(!string.isEmpty(metadata))
+            {
+                selectQuery += whereQueryMetadata;
+            }
+            else if(!string.isEmpty(referenceMetadataTypes))
+            {
+                selectQuery += whereQueryReferenceTypes;
+            }
         }
 
+        system.debug(selectQuery);
         return SendAPIRequest(selectQuery);
     }
 

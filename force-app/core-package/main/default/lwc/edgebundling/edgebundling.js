@@ -1,5 +1,14 @@
+import Visualizer from "c/visualizer";
+
 const createsvg = (d3, data, svg) =>
 {
+    // clear the current svg to draw the new one.
+    svg.selectAll('*').remove();
+
+    if(data == null || data.size == null || data.size  == 0) {
+        return;
+    }
+
     var mapData = generateMap(data.records);
 
     var width = getWidth();
@@ -7,7 +16,7 @@ const createsvg = (d3, data, svg) =>
 
     var cluster = getTree(d3, radius);
     var line = getLine(d3, radius);
-    
+
     var hier1 = hierarchy(mapData);
     var hier = d3.hierarchy(hier1);
     var bil = bilink(hier);
@@ -15,7 +24,7 @@ const createsvg = (d3, data, svg) =>
 
     svg.attr("viewBox", [-width / 2, -width / 2, width, width]);
 
-      const node = svg.append("g")
+    const node = svg.append("g")
         .attr("font-family", "sans-serif")
         .attr("font-size", 10)
         .selectAll("g")
@@ -31,11 +40,12 @@ const createsvg = (d3, data, svg) =>
         .each(function (d) { d.text = this; })
         .on("mouseover", overed)
         .on("mouseout", outed)
+        .on("click", clicked)
         .call(text => text.append("title").text(d => `${id(d)}
         ${d.outgoing.length} outgoing
         ${d.incoming.length} incoming`));
 
-      const link = svg.append("g")
+    const link = svg.append("g")
         .attr("stroke", getColornone)
         .attr("fill", "none")
         .selectAll("path")
@@ -45,25 +55,51 @@ const createsvg = (d3, data, svg) =>
         .attr("d", ([i, o]) => line(i.path(o)))
         .each(function (d) { d.path = this; });
 
-      function overed(d)
-      {
+    function overed(d)
+    {
         link.style("mix-blend-mode", null);
         d3.select(this).attr("font-weight", "bold");
         d3.selectAll(d.incoming.map(d => d.path)).attr("stroke", getColorin).raise();
         d3.selectAll(d.incoming.map(([d]) => d.text)).attr("fill", getColorin).attr("font-weight", "bold");
         d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", getColorout).raise();
         d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", getColorout).attr("font-weight", "bold");
-      }
+    }
 
-      function outed(d)
-      {
+    function outed(d)
+    {
         link.style("mix-blend-mode", "multiply");
         d3.select(this).attr("font-weight", null);
         d3.selectAll(d.incoming.map(d => d.path)).attr("stroke", null);
         d3.selectAll(d.incoming.map(([d]) => d.text)).attr("fill", null).attr("font-weight", null);
         d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", null);
         d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", null).attr("font-weight", null);
-      }
+    }
+
+    function clicked(d)
+    {
+        // filter will only work with incoming connections.
+        if(d.incoming.length > 0) {
+            document.dispatchEvent(
+                new CustomEvent('customEvent', {
+                    bubbles: true,
+                    detail: {
+                        name: d.data.name,
+                        parent: d.parent.data.name
+                    }
+                })
+            );
+        }
+        else {
+            document.dispatchEvent(
+                new CustomEvent('errorEvent', {
+                    bubbles: true,
+                    detail: {
+                        message: 'Filtering will only work when the metadata has incoming dependencies!'
+                    }
+                })
+            );
+        }
+    }
 };
 
 
@@ -184,7 +220,8 @@ function hierarchy(data, delimiter = ".")
         if (i >= 0)
         {
             var tmp = find({ name: name.substring(0, i), children: [] });
-            if(!tmp.children) {
+            if (!tmp.children)
+            {
                 console.log('Fixed missing children, could be edge case to be aware of');
                 tmp.children = new Array();
             }
@@ -213,35 +250,42 @@ function bilink(root)
     return root;
 }
 
-const getTree = (d3, radius) => {
-    return(d3.cluster().size([2 * Math.PI, radius - 100]));
+const getTree = (d3, radius) =>
+{
+    return (d3.cluster().size([2 * Math.PI, radius - 100]));
 };
 
-const getLine = (d3) => {
-    return(d3.lineRadial()
-            .curve(d3.curveBundle.beta(0.85))
-            .radius(d => d.y)
-            .angle(d => d.x)
+const getLine = (d3) =>
+{
+    return (d3.lineRadial()
+        .curve(d3.curveBundle.beta(0.85))
+        .radius(d => d.y)
+        .angle(d => d.x)
     );
 };
 
-function getWidth() {
+function getWidth()
+{
     return 954;
 };
 
-function getRadius(width) {
+function getRadius(width)
+{
     return width / 2;
 };
 
-function getColorin() {
+function getColorin()
+{
     return "steelblue";
 }
 
-function getColorout() {
+function getColorout()
+{
     return "orange";
 }
 
-function getColornone() {
+function getColornone()
+{
     return "#ccc";
 }
 
